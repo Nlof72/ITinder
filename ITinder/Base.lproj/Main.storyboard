@@ -158,6 +158,9 @@
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                     <color key="baseBackgroundColor" red="0.98039215690000003" green="0.074509803920000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="OnRegisterButtonClick:" destination="wZ6-UR-FEx" eventType="touchUpInside" id="YyX-ca-wIZ"/>
+                                </connections>
                             </button>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vjw-tB-0Mf">
                                 <rect key="frame" x="20" y="785" width="374" height="56"/>
@@ -171,6 +174,9 @@
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                     <color key="baseForegroundColor" red="0.98039215690000003" green="0.074509803920000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="XEv-r2-1xo"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0uJ-43-3uP"/>
@@ -198,6 +204,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5jI-u8-vNl"/>
+                    <connections>
+                        <outlet property="ConfirmPasswordField" destination="E8V-kD-EQ3" id="5IG-RP-T7Z"/>
+                        <outlet property="EmailField" destination="PkH-ar-7It" id="xpv-ku-w1q"/>
+                        <outlet property="PasswordField" destination="vGa-JM-TeX" id="pw2-uv-zDP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1f2-dI-nse" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -253,11 +264,14 @@
                                     <constraint firstAttribute="height" constant="56" id="rT8-QF-zrx"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Зарегистрироваться" titleAlignment="center">
+                                <buttonConfiguration key="configuration" style="filled" title="Войти" titleAlignment="center">
                                     <backgroundConfiguration key="background" cornerRadius="36" strokeWidth="1" strokeOutset="1"/>
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                     <color key="baseBackgroundColor" red="0.98039215690000003" green="0.074509803920000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="OnLoginClick:" destination="fte-Ub-G2x" eventType="touchUpInside" id="h9f-99-8gT"/>
+                                </connections>
                             </button>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zDd-bz-vwg">
                                 <rect key="frame" x="20" y="779" width="374" height="56"/>
@@ -271,6 +285,9 @@
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                     <color key="baseForegroundColor" red="0.98039215690000003" green="0.074509803920000006" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="wf6-YP-EW4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="f3v-s6-aTt"/>
@@ -295,12 +312,19 @@
                             <constraint firstItem="W0L-ZO-sUp" firstAttribute="centerX" secondItem="iiO-si-Xeb" secondAttribute="centerX" id="yKO-d1-tfX"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="EmailField" destination="W0L-ZO-sUp" id="O0e-3W-bGB"/>
+                        <outlet property="PasswordField" destination="tWV-rT-pcK" id="w8f-US-Edu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rjT-hF-Jbb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1040.5797101449275" y="877.90178571428567"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="wf6-YP-EW4"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="MainLogo" width="166" height="48"/>
         <image name="MainPersonGroup" width="318" height="203"/>
