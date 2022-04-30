@@ -30,3 +30,20 @@ struct TopicData:Decodable{
         case title
       }
 }
+
+
+struct UserData:Decodable{
+    let userId: String?
+    let name: String?
+    let aboutMyself: String?
+    let avatar: String?
+    let topics: [TopicData]
+    
+    enum CodingKeys: String, CodingKey {
+        case userId
+        case name
+        case aboutMyself
+        case avatar
+        case topics
+    }
+}

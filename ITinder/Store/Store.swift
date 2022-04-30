@@ -9,4 +9,5 @@ import Foundation
 
 struct AppState {
     static var topics: [TopicData]? = nil
+    static var userData: UserData? = nil
 }

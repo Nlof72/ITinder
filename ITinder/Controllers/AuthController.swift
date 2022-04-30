@@ -13,6 +13,8 @@ class AuthController: UIViewController {
     @IBOutlet weak var PasswordField: UITextField!
     @IBOutlet weak var ConfirmPasswordField: UITextField!
     
+    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,8 +22,16 @@ class AuthController: UIViewController {
     }
 
     @IBAction func OnRegisterButtonClick(_ sender: UIButton) {
+//        let nextViewController = self.storyBoard.instantiateViewController(withIdentifier: "aboutYou") as UIViewController
+//                nextViewController.modalPresentationStyle = .fullScreen
+//                self.present(nextViewController, animated: false, completion: nil)
+
         if let email = EmailField.text, let password = PasswordField.text{
-            userAction.registerUser(email: email, password: password)
+            userAction.registerUser(email: email, password: password){
+                let nextViewController = self.storyBoard.instantiateViewController(withIdentifier: "aboutYou") as UIViewController
+                        nextViewController.modalPresentationStyle = .fullScreen
+                        self.present(nextViewController, animated: false, completion: nil)
+            }
         }
     }
     

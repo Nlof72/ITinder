@@ -20,7 +20,6 @@ public struct userApi{
     }
 
     static func loginUser(parameters: [String: String]) -> DataRequest{
-        print(headers)
         return AF.request("\(baseUrl)auth/login", method: .post, parameters: parameters, encoding: JSONEncoding.default)
     }
 
@@ -37,5 +36,29 @@ public struct userApi{
     
     static func getTopics() -> DataRequest{
         return AF.request("\(baseUrl)topic", method: .get, headers:headers)
+    }
+    
+    static func updateProfile(parameters: [String: Any]) -> DataRequest{
+        return AF.request("\(baseUrl)profile", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+    }
+    
+    static func uploadUserAvatar(avatar: Data){
+        let localheaders: HTTPHeaders = [
+            "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)",
+            "Accept": "multipart/form-data"
+        ]
+        
+        let file = MultipartFormData()
+        file.append(avatar, withName: "avatar", fileName: "avatar.jpeg", mimeType: "image/jpeg")
+        
+        debugPrint(file)
+        
+        AF.upload(multipartFormData: file,to: "\(baseUrl)profile/avatar", method: .post, headers: localheaders)
+        //AF.upload(file, to: "\(baseUrl)profile/avatar", method: .post, headers: localheaders)
+//        AF.request("\(baseUrl)profile/avatar", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: localheaders).validate()
+    }
+    
+    static func deleteUserAvatar(){
+        AF.request("\(baseUrl)profile/avatar", method: .delete, headers: headers).validate()
     }
 }
