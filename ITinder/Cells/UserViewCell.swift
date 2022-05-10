@@ -35,8 +35,7 @@ class UserViewCell: UICollectionViewCell {
         }else{
             self.UserImage.image = UIImage(named: "ImagePlaceholder")
         }
-        UserImage.cornerRadius = 60
-        
+        UserImage.cornerRadius = 55
         
         
         if let name = userData?.name{

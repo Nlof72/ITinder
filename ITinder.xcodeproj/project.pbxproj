@@ -17,6 +17,9 @@
 		1170276A281D1E54003B445D /* MainContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11702769281D1E54003B445D /* MainContainerController.swift */; };
 		11768D9E28195DF600B68C3D /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 11768D9D28195DF600B68C3D /* ReSwift */; };
 		1176AFBF281AEAC600B0B372 /* AboutYouController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176AFBE281AEAC600B0B372 /* AboutYouController.swift */; };
+		1182B52C282AC36800333B00 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1182B52A282AC36800333B00 /* ChatCell.swift */; };
+		1182B52D282AC36800333B00 /* ChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1182B52B282AC36800333B00 /* ChatCell.xib */; };
+		11832E58282A65870028AB0F /* ChatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11832E57282A65870028AB0F /* ChatsController.swift */; };
 		1184C28D281B140500945E9D /* ExtensionForTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184C28C281B140500945E9D /* ExtensionForTextView.swift */; };
 		118A1768281D7ADF007B3EAD /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A1767281D7ADF007B3EAD /* ProfileController.swift */; };
 		118A1772281D80B4007B3EAD /* LabelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A1771281D80B4007B3EAD /* LabelTableView.swift */; };
@@ -119,6 +122,9 @@
 		1170275F281D00E7003B445D /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
 		11702769281D1E54003B445D /* MainContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerController.swift; sourceTree = "<group>"; };
 		1176AFBE281AEAC600B0B372 /* AboutYouController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutYouController.swift; sourceTree = "<group>"; };
+		1182B52A282AC36800333B00 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		1182B52B282AC36800333B00 /* ChatCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatCell.xib; sourceTree = "<group>"; };
+		11832E57282A65870028AB0F /* ChatsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsController.swift; sourceTree = "<group>"; };
 		1184C28C281B140500945E9D /* ExtensionForTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionForTextView.swift; sourceTree = "<group>"; };
 		118A1767281D7ADF007B3EAD /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		118A1771281D80B4007B3EAD /* LabelTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableView.swift; sourceTree = "<group>"; };
@@ -176,6 +182,8 @@
 			children = (
 				118EED7F2823272E00113520 /* UserViewCell.swift */,
 				118EED802823272E00113520 /* UserViewCell.xib */,
+				1182B52A282AC36800333B00 /* ChatCell.swift */,
+				1182B52B282AC36800333B00 /* ChatCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -226,6 +234,7 @@
 				11702769281D1E54003B445D /* MainContainerController.swift */,
 				118A1767281D7ADF007B3EAD /* ProfileController.swift */,
 				11CDB806281E930B00B3C3AF /* FlowController.swift */,
+				11832E57282A65870028AB0F /* ChatsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -408,6 +417,7 @@
 			files = (
 				11B29CC32817ED5000A32126 /* LaunchScreen.storyboard in Resources */,
 				11B29CC02817ED5000A32126 /* Assets.xcassets in Resources */,
+				1182B52D282AC36800333B00 /* ChatCell.xib in Resources */,
 				11B29CBE2817ED4D00A32126 /* Main.storyboard in Resources */,
 				118EED822823272E00113520 /* UserViewCell.xib in Resources */,
 			);
@@ -431,7 +441,9 @@
 				118EED842823272E00113520 /* UserCollectionController.swift in Sources */,
 				118A1768281D7ADF007B3EAD /* ProfileController.swift in Sources */,
 				116E33582819562C000D6BBF /* Store.swift in Sources */,
+				11832E58282A65870028AB0F /* ChatsController.swift in Sources */,
 				118EED812823272E00113520 /* UserViewCell.swift in Sources */,
+				1182B52C282AC36800333B00 /* ChatCell.swift in Sources */,
 				116E335528195047000D6BBF /* Types.swift in Sources */,
 				11CDB807281E930B00B3C3AF /* FlowController.swift in Sources */,
 				11B29CD328180D8F00A32126 /* AuthController.swift in Sources */,

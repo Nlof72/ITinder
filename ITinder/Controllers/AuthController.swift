@@ -18,6 +18,12 @@ class AuthController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let email = UserDefaults.standard.string(forKey: "email"){
+            EmailField.text = email
+        }
+        if let password = UserDefaults.standard.string(forKey: "password"){
+            PasswordField.text = password
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -31,6 +37,7 @@ class AuthController: UIViewController {
                 let nextViewController = self.storyBoard.instantiateViewController(withIdentifier: "aboutYou") as UIViewController
                         nextViewController.modalPresentationStyle = .fullScreen
                         self.present(nextViewController, animated: false, completion: nil)
+
             }
         }
     }

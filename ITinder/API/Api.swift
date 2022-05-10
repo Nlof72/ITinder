@@ -85,6 +85,30 @@ public struct userApi{
     }
     
     static func getUsersPagination(parameters: [String: Int]) -> DataRequest{
-        AF.request("\(baseUrl)user", method: .get, parameters: parameters ,headers: headers)
+        debugPrint(parameters)
+        return AF.request("\(baseUrl)user", method: .get, parameters: parameters ,headers: headers)
+    }
+    
+    static func getAllMyChats() -> DataRequest{
+        return AF.request("\(baseUrl)chat", method: .get, headers: headers)
+    }
+    
+    static func createChatWitUser(parameters: [String: String]) -> DataRequest{
+        return AF.request("\(baseUrl)chat", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+    }
+    
+    static func getListOfMessagesForUser(chatId: String, parameters: [String: Int]) -> DataRequest{
+        return AF.request("\(baseUrl)chat/\(chatId)/message", method: .get, parameters: parameters, headers: headers)
+    }
+    
+    static func sendMessageForUser(chatId: String, parametrs:  MultipartFormData) -> UploadRequest{
+        let localheaders: HTTPHeaders = [
+            "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)",
+            "Accept": "multipart/form-data"
+        ]
+        
+        debugPrint(parametrs)
+        
+        return AF.upload(multipartFormData: parametrs,to: "\(baseUrl)chat/\(chatId)/message", method: .post, headers: localheaders)
     }
 }

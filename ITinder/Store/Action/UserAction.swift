@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 struct userAction{
     static func registerUser(email:String, password:String, callback: @escaping () -> Void){
@@ -21,6 +22,7 @@ struct userAction{
             UserDefaults.standard.set(data.accessToken, forKey: "accessToken")
             UserDefaults.standard.set(data.refreshToken, forKey: "refreshToken")
             getUserFeed()
+            getAllChats()
             getPagedUserList(limit: AppState.limit, offset: AppState.offset)
             getTopics(){
                 callback()
@@ -42,10 +44,13 @@ struct userAction{
             UserDefaults.standard.set(data.accessToken, forKey: "accessToken")
             getTopics()
             getPagedUserList(limit: AppState.limit, offset: AppState.offset	)
+            getAllChats()
             getUserFeed(){
                 getCurrentUserData(){
                     callback()
                 }
+                UserDefaults.standard.set(email, forKey: "email")
+                UserDefaults.standard.set(password, forKey: "password")
             }
         }
     }
@@ -149,8 +154,68 @@ struct userAction{
         userApi.getUsersPagination(parameters: parameters).validate().responseDecodable(of:[UserData].self){
             response in
             guard let data = response.value else {return}
-            AppState.userPagedList = AppState.userPagedList + data
+            AppState.userPagedList.append(contentsOf: data)
             callback(data)
+        }
+    }
+    
+    static func getAllChats(callback: @escaping () -> Void = emptyCallback){
+        
+        userApi.getAllMyChats().validate().responseDecodable(of: [ChatElement].self){
+            response in
+            debugPrint(response)
+            guard let data = response.value else {return}
+            UserChatsState.chats = data
+            callback()
+        }
+    }
+    
+    static func createChat(_ userId: String, callback: @escaping () -> Void = emptyCallback){
+        let parameters: [String: String] = [
+            "userId": userId,
+        ]
+        
+        userApi.createChatWitUser(parameters: parameters).validate().responseDecodable(of: ChatInfo.self){
+            response in
+            debugPrint(response)
+            guard let data = response.value else {return}
+            
+            UserChatsState.chats.append(ChatElement(chat: data, lastMessage: nil))
+            callback()
+        }
+    }
+    
+    static func getUserMessages(_ chatId: String, limit: Int, offset: Int, callback: @escaping () -> Void = emptyCallback){
+        let parameters: [String: Int] = [
+            "limit": limit,
+            "offset": offset,
+        ]
+        
+        userApi.getListOfMessagesForUser(chatId: chatId, parameters: parameters).validate().responseDecodable(of: [Message].self){
+            response in
+            guard let data = response.value else {return}
+            
+            UserChatsState.currentMessages.append(contentsOf: data)
+        }
+    }
+    
+    static func sendMessageToUser(_ chatId: String, messageText: String, attachments: [Data], callback: @escaping () -> Void = emptyCallback){
+        let file = MultipartFormData()
+
+        file.append(chatId.data(using: .utf8)!, withName: "messageText")
+        
+        if attachments.count > 0 {
+            for element in attachments {
+                file.append(element, withName: "file", fileName: "file.jpeg", mimeType: "image/jpeg")
+            }
+        }
+        
+        userApi.sendMessageForUser(chatId: chatId, parametrs: file).responseDecodable(of: Message.self){
+            response in
+            guard let data = response.value else {return}
+            
+            UserChatsState.currentMessages.append(data)
+            callback()
         }
     }
 }

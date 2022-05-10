@@ -17,16 +17,26 @@ class FlowController: UIViewController {
     let userData = AppState.userFeed
     let tagsView = TagLabelView()
     var currentUserIndex = 0
+    public var currentUserOutsid: UserData? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         MatchView.removeFromSuperview()
-        initUser()
+        initUser(userData?[currentUserIndex])
+        if currentUserOutsid != nil{
+            tabBarController?.tabBar.isHidden = true
+        }
     }
     
-    func initUser(){
-        let currentUser = userData?[currentUserIndex]
+    func initUser(_ user: UserData?){
+        let currentUser: UserData?
+        
+        if let data = currentUserOutsid {
+            currentUser = data
+        }else{
+            currentUser = user
+        }
         
         if let imageLink = currentUser?.avatar{
             if let url = URL(string: imageLink){
@@ -64,35 +74,63 @@ class FlowController: UIViewController {
     
 
     @IBAction func onRefuseClick(_ sender: UIButton) {
-        let id = self.userData?[self.currentUserIndex].userId
+        var id: String?
+        
+        if let outsideId = currentUserOutsid?.userId{
+            id = outsideId
+        }else{
+            id = self.userData?[self.currentUserIndex].userId
+        }
+
         if id != nil{
             userAction.refuseUser(userId: id!)
-            currentUserIndex = currentUserIndex + 1
-            initUser()
+            if currentUserOutsid == nil {
+                currentUserIndex = currentUserIndex + 1
+                initUser(userData?[currentUserIndex])
+            }
         }
         
     }
     
     @IBAction func onLikeClick(_ sender: UIButton) {
-        //self.tabBarController?.view.addSubview(self.MatchView)
-        let id = self.userData?[self.currentUserIndex].userId
-        if id != nil{
-            userAction.likeUser(userId: id!){
-                isMutual in
-                if isMutual{
-                    if let tabBarController = self.tabBarController {
-                        tabBarController.view.addSubview(self.MatchView)
-                    }
-                }else{
-                    self.currentUserIndex = self.currentUserIndex + 1
-                    self.initUser()
-                }
-            }
-        }
+        self.tabBarController?.view.addSubview(self.MatchView)
+//        let id = self.userData?[self.currentUserIndex].userId
+//        if id != nil{
+//            userAction.likeUser(userId: id!){
+//                isMutual in
+//                if isMutual{
+//                    if let tabBarController = self.tabBarController {
+//                        tabBarController.view.addSubview(self.MatchView)
+//                    }
+//                }else{
+//                    if self.currentUserOutsid == nil{
+//                        self.currentUserIndex = self.currentUserIndex + 1
+//                        self.initUser(self.userData?[self.currentUserIndex])
+//                    }
+//                }
+//            }
+//        }
     }
     
     
     @IBAction func onWriteMessage(_ sender: UIButton) {
+        var id: String?
+        
+        if let outsideId = currentUserOutsid?.userId{
+            id = outsideId
+        }else{
+            id = self.userData?[self.currentUserIndex].userId
+        }
+        if let userId = id{
+            debugPrint("-----====-----")
+            userAction.createChat(userId)
+        }
+        
+
         MatchView.removeFromSuperview()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
     }
 }

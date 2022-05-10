@@ -11,13 +11,14 @@ class UserCollectionController: UIViewController {
 
     @IBOutlet weak var userCollection: UICollectionView!
     
+    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         userCollection.register(UINib(nibName: "UserViewCell", bundle: nil), forCellWithReuseIdentifier: "UserViewCell")
         userCollection.dataSource = self
         userCollection.delegate = self
-        debugPrint(AppState.userPagedList.count)
         // Do any additional setup after loading the view.
     }
     
@@ -25,7 +26,6 @@ class UserCollectionController: UIViewController {
 
 extension UserCollectionController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        debugPrint(AppState.userPagedList.count)
         return AppState.userPagedList.count
     }
     
@@ -51,24 +51,31 @@ extension UserCollectionController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let currentItemNumber = indexPath.item
-        let middleCountOfUser = (AppState.userPagedList.count / (AppState.offset+1))/2
+        let middleCountOfUser = (AppState.userPagedList.count)/2
         if currentItemNumber > middleCountOfUser{
             if AppState.loading  || AppState.allUsers{
                 return
             }
             AppState.loading = true
-            userAction.getPagedUserList(limit: AppState.limit, offset: AppState.offset + 1){
+            userAction.getPagedUserList(limit: AppState.limit, offset: AppState.offset + AppState.limit){
                 response in
+                collectionView.reloadData()
                 if response.count < AppState.limit {
                     AppState.allUsers = true
+                    AppState.loading = false
+                    return
                 }
-                AppState.offset = AppState.offset + 1
+                AppState.offset = AppState.offset + AppState.limit
                 AppState.loading = false
-                collectionView.reloadData()
+                debugPrint(response)
             }
         }
-        debugPrint(indexPath.item)
-        debugPrint(indexPath)
-        debugPrint(AppState.offset)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let nextViewController = self.storyBoard.instantiateViewController(withIdentifier: "PeopleController") as! FlowController
+                nextViewController.modalPresentationStyle = .fullScreen
+        nextViewController.currentUserOutsid = AppState.userPagedList[indexPath.item]
+        self.show(nextViewController, sender: self)
     }
 }

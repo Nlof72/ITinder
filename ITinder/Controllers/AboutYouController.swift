@@ -27,7 +27,7 @@ class AboutYouController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         AboutYouInfo.textContainerInset = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
-        
+        tabBarController?.tabBar.isHidden = true
 
         
         if let topics = AppState.topics{
@@ -91,6 +91,9 @@ class AboutYouController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
     
 }
 

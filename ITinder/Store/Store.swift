@@ -12,10 +12,15 @@ struct AppState {
     static var userData: UserData? = nil
     static var userFeed: [UserData]? = nil
     static var userPagedList: [UserData] = []
-    static var limit = 40
+    static var limit = 60
     static var offset = 0
     static var loading = false
     static var allUsers = false
+}
+
+struct UserChatsState{
+    static var chats: [ChatElement] = []
+    static var currentMessages: [Message] = []
 }
 
 

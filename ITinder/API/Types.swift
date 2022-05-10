@@ -56,3 +56,29 @@ struct UserMatch:Decodable{
         case isMutual
     }
 }
+
+struct ChatInfo:Decodable{
+    let id: String
+    let title: String
+    let avatar: String?
+}
+
+struct UserChatInfo:Decodable{
+    let userId: String
+    let name: String
+    let aboutMyself: String?
+    let avatar: String?
+}
+
+struct Message:Decodable{
+    let id: String
+    let text: String
+    let createdAt: String
+    let user: UserChatInfo
+    let attachments: [String]
+}
+
+struct ChatElement: Decodable{
+    let chat: ChatInfo
+    let lastMessage: Message?
+}
