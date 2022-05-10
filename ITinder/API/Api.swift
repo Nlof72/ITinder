@@ -53,12 +53,38 @@ public struct userApi{
         
         debugPrint(file)
         
-        AF.upload(multipartFormData: file,to: "\(baseUrl)profile/avatar", method: .post, headers: localheaders)
+        AF.upload(multipartFormData: file,to: "\(baseUrl)profile/avatar", method: .post, headers: localheaders).responseJSON(){
+            response in
+            debugPrint(response)
+        }
         //AF.upload(file, to: "\(baseUrl)profile/avatar", method: .post, headers: localheaders)
 //        AF.request("\(baseUrl)profile/avatar", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: localheaders).validate()
     }
     
     static func deleteUserAvatar(){
         AF.request("\(baseUrl)profile/avatar", method: .delete, headers: headers).validate()
+    }
+    
+    static func getCurrentUserProfile() -> DataRequest{
+        return AF.request("\(baseUrl)profile", method: .get, headers:headers)
+    }
+    
+    static func getUserFeed() -> DataRequest{
+        return AF.request("\(baseUrl)user/feed", method: .get, headers: headers)
+    }
+    
+    static func refuseUser(userId: String){
+        AF.request("\(baseUrl)user/\(userId)/dislike", method: .post, headers: headers).responseJSON(){
+            response in
+            debugPrint(response)
+        }
+    }
+    
+    static func likeUser(userId: String) -> DataRequest{
+        return AF.request("\(baseUrl)user/\(userId)/like", method: .post, headers: headers)
+    }
+    
+    static func getUsersPagination(parameters: [String: Int]) -> DataRequest{
+        AF.request("\(baseUrl)user", method: .get, parameters: parameters ,headers: headers)
     }
 }

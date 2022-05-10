@@ -18,6 +18,11 @@
 		11768D9E28195DF600B68C3D /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 11768D9D28195DF600B68C3D /* ReSwift */; };
 		1176AFBF281AEAC600B0B372 /* AboutYouController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176AFBE281AEAC600B0B372 /* AboutYouController.swift */; };
 		1184C28D281B140500945E9D /* ExtensionForTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184C28C281B140500945E9D /* ExtensionForTextView.swift */; };
+		118A1768281D7ADF007B3EAD /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A1767281D7ADF007B3EAD /* ProfileController.swift */; };
+		118A1772281D80B4007B3EAD /* LabelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118A1771281D80B4007B3EAD /* LabelTableView.swift */; };
+		118EED812823272E00113520 /* UserViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118EED7F2823272E00113520 /* UserViewCell.swift */; };
+		118EED822823272E00113520 /* UserViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118EED802823272E00113520 /* UserViewCell.xib */; };
+		118EED842823272E00113520 /* UserCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118EED832823272E00113520 /* UserCollectionController.swift */; };
 		11B29CB72817ED4D00A32126 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B29CB62817ED4D00A32126 /* AppDelegate.swift */; };
 		11B29CB92817ED4D00A32126 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B29CB82817ED4D00A32126 /* SceneDelegate.swift */; };
 		11B29CBB2817ED4D00A32126 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B29CBA2817ED4D00A32126 /* ViewController.swift */; };
@@ -28,6 +33,7 @@
 		11B29CD328180D8F00A32126 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B29CD228180D8F00A32126 /* AuthController.swift */; };
 		11B29CF02818156900A32126 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B29CE02818149B00A32126 /* Alamofire.framework */; platformFilter = ios; };
 		11B29CF12818156900A32126 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 11B29CE02818149B00A32126 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11CDB807281E930B00B3C3AF /* FlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CDB806281E930B00B3C3AF /* FlowController.swift */; };
 		11CFE573281832F30070A365 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CFE572281832F30070A365 /* Api.swift */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +120,11 @@
 		11702769281D1E54003B445D /* MainContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerController.swift; sourceTree = "<group>"; };
 		1176AFBE281AEAC600B0B372 /* AboutYouController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutYouController.swift; sourceTree = "<group>"; };
 		1184C28C281B140500945E9D /* ExtensionForTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionForTextView.swift; sourceTree = "<group>"; };
+		118A1767281D7ADF007B3EAD /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		118A1771281D80B4007B3EAD /* LabelTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableView.swift; sourceTree = "<group>"; };
+		118EED7F2823272E00113520 /* UserViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewCell.swift; sourceTree = "<group>"; };
+		118EED802823272E00113520 /* UserViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserViewCell.xib; sourceTree = "<group>"; };
+		118EED832823272E00113520 /* UserCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionController.swift; sourceTree = "<group>"; };
 		11B29CB32817ED4D00A32126 /* ITinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B29CB62817ED4D00A32126 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11B29CB82817ED4D00A32126 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +136,7 @@
 		11B29CCE2817F06300A32126 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		11B29CD228180D8F00A32126 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		11B29CD42818149B00A32126 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
+		11CDB806281E930B00B3C3AF /* FlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowController.swift; sourceTree = "<group>"; };
 		11CFE572281832F30070A365 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +171,15 @@
 			path = Store;
 			sourceTree = "<group>";
 		};
+		118EED762823272E00113520 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				118EED7F2823272E00113520 /* UserViewCell.swift */,
+				118EED802823272E00113520 /* UserViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		11B29CAA2817ED4D00A32126 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +200,7 @@
 		11B29CB52817ED4D00A32126 /* ITinder */ = {
 			isa = PBXGroup;
 			children = (
+				118EED762823272E00113520 /* Cells */,
 				116E335628195615000D6BBF /* Store */,
 				11CFE569281832CF0070A365 /* API */,
 				11B29CCD2817F04600A32126 /* Helpers */,
@@ -198,9 +220,12 @@
 		11B29CCA2817EFCD00A32126 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				118EED832823272E00113520 /* UserCollectionController.swift */,
 				11B29CD228180D8F00A32126 /* AuthController.swift */,
 				1176AFBE281AEAC600B0B372 /* AboutYouController.swift */,
 				11702769281D1E54003B445D /* MainContainerController.swift */,
+				118A1767281D7ADF007B3EAD /* ProfileController.swift */,
+				11CDB806281E930B00B3C3AF /* FlowController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -213,6 +238,7 @@
 				116D93DC2819F87300FD765C /* ExtensionViewEditor.swift */,
 				1184C28C281B140500945E9D /* ExtensionForTextView.swift */,
 				1170275F281D00E7003B445D /* CustomTableView.swift */,
+				118A1771281D80B4007B3EAD /* LabelTableView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -383,6 +409,7 @@
 				11B29CC32817ED5000A32126 /* LaunchScreen.storyboard in Resources */,
 				11B29CC02817ED5000A32126 /* Assets.xcassets in Resources */,
 				11B29CBE2817ED4D00A32126 /* Main.storyboard in Resources */,
+				118EED822823272E00113520 /* UserViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,12 +423,17 @@
 				11CFE573281832F30070A365 /* Api.swift in Sources */,
 				11B29CCF2817F06300A32126 /* Gradient.swift in Sources */,
 				11B29CBB2817ED4D00A32126 /* ViewController.swift in Sources */,
+				118A1772281D80B4007B3EAD /* LabelTableView.swift in Sources */,
 				1176AFBF281AEAC600B0B372 /* AboutYouController.swift in Sources */,
 				11702760281D00E7003B445D /* CustomTableView.swift in Sources */,
 				1184C28D281B140500945E9D /* ExtensionForTextView.swift in Sources */,
 				1170276A281D1E54003B445D /* MainContainerController.swift in Sources */,
+				118EED842823272E00113520 /* UserCollectionController.swift in Sources */,
+				118A1768281D7ADF007B3EAD /* ProfileController.swift in Sources */,
 				116E33582819562C000D6BBF /* Store.swift in Sources */,
+				118EED812823272E00113520 /* UserViewCell.swift in Sources */,
 				116E335528195047000D6BBF /* Types.swift in Sources */,
+				11CDB807281E930B00B3C3AF /* FlowController.swift in Sources */,
 				11B29CD328180D8F00A32126 /* AuthController.swift in Sources */,
 				116D93D32819F87300FD765C /* CustomTextView.swift in Sources */,
 				11B29CB72817ED4D00A32126 /* AppDelegate.swift in Sources */,

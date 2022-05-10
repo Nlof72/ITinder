@@ -7,8 +7,9 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
-class TagButtonView: UIView {
+class TagLabelView: UIView {
     
     var tagNames: [TopicData] = [] {
         didSet {
@@ -17,8 +18,6 @@ class TagButtonView: UIView {
     }
     
     var selectedTags: [TopicData] = []
-    
-    var buttons: [UIButton] = []
     
     let tagHeight:CGFloat = 30
     let tagPadding: CGFloat = 16
@@ -36,16 +35,6 @@ class TagButtonView: UIView {
         commonInit()
     }
     
-    func setSelectedTags(_ data:[TopicData]){
-        for tag in data {
-            let tagButton = buttons.first(where: {$0.titleLabel?.text == tag.title})
-            
-            tagButton?.setTitleColor(.white, for: .normal)
-            tagButton?.backgroundColor = UIColor(red: 250/255, green: 19/255, blue: 171/255, alpha: 1)
-        }
-        selectedTags = data
-    }
-    
     func commonInit() -> Void {
     }
 
@@ -61,40 +50,17 @@ class TagButtonView: UIView {
         while self.subviews.count < tagNames.count {
 
             // create a new label
-            let newLabel = UIButton(type: .system, primaryAction: UIAction(title: "Button Title", handler: { action in
-                let button = action.sender as! UIButton
-                if let title = button.title(for: .normal) {
-                    if(self.selectedTags.contains(where: {$0.title == title})){
-                        button.backgroundColor = .white
-                        button.setTitleColor( UIColor(red: 250/255, green: 19/255, blue: 171/255, alpha: 1), for: .normal)
-                        
-                        let tag = self.tagNames.first(where: {$0.title == title})
-                        if let data = tag {
-                            self.selectedTags.removeAll(where: {$0.title == data.title})
-                        }
-                    }else{
-                        button.setTitleColor(.white, for: .normal)
-                        button.backgroundColor = UIColor(red: 250/255, green: 19/255, blue: 171/255, alpha: 1)
-
-                        let tag = self.tagNames.first(where: {$0.title == title})
-                        if let data = tag {
-                            self.selectedTags.append(data)
-                        }
-                    }
-
-                    print("Button tapped!")
-                }
-            }))
+            let newLabel = UILabel()
             
-            buttons.append(newLabel)
             //newLabel.addTarget(newLabel.self, action: #selector(click), for: .touchUpInside)
             // set its properties (title, colors, corners, etc)
-            //newLabel.textAlignment = .center
-            newLabel.backgroundColor = .white
+            newLabel.textAlignment = .center
+            newLabel.backgroundColor = UIColor(red: 250/255, green: 19/255, blue: 171/255, alpha: 1)
+            newLabel.textColor = UIColor.white
             newLabel.layer.masksToBounds = true
             newLabel.layer.cornerRadius = 16
-            newLabel.layer.borderColor = UIColor(red: 250/255, green: 19/255, blue: 171/255, alpha: 1).cgColor
-            newLabel.layer.borderWidth = 1
+            //newLabel.layer.borderColor = UIColor.red.cgColor
+            //newLabel.layer.borderWidth = 1
 
             addSubview(newLabel)
             
@@ -102,12 +68,10 @@ class TagButtonView: UIView {
 
         // now loop through labels and set text and size
         for (str, v) in zip(tagNames, self.subviews) {
-            guard let label = v as? UIButton else {
+            guard let label = v as? UILabel else {
                 fatalError("non-UILabel subview found!")
             }
-            label.setTitle(str.title, for: .normal)
-            label.setTitleColor(UIColor(red: 250/255, green: 19/255, blue: 171/255, alpha: 1), for: .normal)
-            
+            label.text = str.title
             label.frame.size.width = label.intrinsicContentSize.width + tagPadding
             label.frame.size.height = tagHeight
         }
@@ -122,7 +86,7 @@ class TagButtonView: UIView {
         // for each label in the array
         self.subviews.forEach { v in
             
-            guard let label = v as? UIButton else {
+            guard let label = v as? UILabel else {
                 fatalError("non-UILabel subview found!")
             }
 

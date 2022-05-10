@@ -20,6 +20,8 @@ struct userAction{
             guard let data = response.value else { return }
             UserDefaults.standard.set(data.accessToken, forKey: "accessToken")
             UserDefaults.standard.set(data.refreshToken, forKey: "refreshToken")
+            getUserFeed()
+            getPagedUserList(limit: AppState.limit, offset: AppState.offset)
             getTopics(){
                 callback()
             }
@@ -28,18 +30,23 @@ struct userAction{
         }
     }
 
-    static func loginUser(email:String, password:String){
+    static func loginUser(email:String, password:String, callback: @escaping () -> Void){
         let parameters: [String: String] = [
             "email": email,
             "password": password,
         ]
         userApi.loginUser(parameters: parameters).validate().responseDecodable(of: TokenData.self){
             response in
+            debugPrint(response)
             guard let data = response.value else { return }
             UserDefaults.standard.set(data.accessToken, forKey: "accessToken")
             getTopics()
-//            headers["Authorization"] = data.accessToken
-//            print("result we login and got accessToken \(data.accessToken)")
+            getPagedUserList(limit: AppState.limit, offset: AppState.offset	)
+            getUserFeed(){
+                getCurrentUserData(){
+                    callback()
+                }
+            }
         }
     }
 
@@ -65,7 +72,7 @@ struct userAction{
         }
     }
     
-    static func updateUserProfile(name: String? = nil, aboutMyself: String? = nil, topics: [String] = []){
+    static func updateUserProfile(name: String? = nil, aboutMyself: String? = nil, topics: [String] = [], callback: @escaping () -> Void = emptyCallback){
         
         var parameters: [String: Any] = [:]
         if let na = name {
@@ -87,6 +94,7 @@ struct userAction{
             response in
             guard let data = response.value else {return}
             AppState.userData = data
+            callback()
             print(data)
         }
     }
@@ -98,9 +106,64 @@ struct userAction{
     static func deleteUserAvatar(){
         userApi.deleteUserAvatar()
     }
+    
+    static func getCurrentUserData(callback: @escaping () -> Void = emptyCallback){
+        userApi.getCurrentUserProfile().validate().responseDecodable(of: UserData.self){
+            response in
+            guard let data = response.value else {return}
+            AppState.userData = data
+            callback()
+            print(data)
+        }
+    }
+    
+    static func getUserFeed(callback: @escaping () -> Void = emptyCallback){
+        userApi.getUserFeed().validate().responseDecodable(of: [UserData].self){
+            response in
+            guard let data = response.value else {return}
+            AppState.userFeed = data
+            callback()
+            debugPrint(data)
+        }
+    }
+    
+    static func refuseUser(userId: String, callback: @escaping () -> Void = emptyCallback){
+        userApi.refuseUser(userId: userId)
+        callback()
+    }
+    
+    static func likeUser(userId: String, callback: @escaping (_ isMatch: Bool) -> Void = emptyBoolCallback){
+        userApi.likeUser(userId: userId).validate().responseDecodable(of: UserMatch.self){
+            response in
+            guard let data = response.value else {return}
+            callback(data.isMutual)
+        }
+    }
+    
+    static func getPagedUserList(limit: Int, offset: Int, callback: @escaping ([UserData]) -> Void = emptyUserArrayCallback){
+        let parameters: [String: Int] = [
+            "limit": limit,
+            "offset": offset,
+        ]
+        
+        userApi.getUsersPagination(parameters: parameters).validate().responseDecodable(of:[UserData].self){
+            response in
+            guard let data = response.value else {return}
+            AppState.userPagedList = AppState.userPagedList + data
+            callback(data)
+        }
+    }
 }
 
 
 func emptyCallback() {
+    
+}
+
+func emptyBoolCallback(isMatch: Bool) {
+    
+}
+
+func emptyUserArrayCallback(userData: [UserData]) {
     
 }

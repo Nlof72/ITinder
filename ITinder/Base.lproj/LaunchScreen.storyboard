@@ -15,6 +15,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackImg" translatesAutoresizingMaskIntoConstraints="NO" id="2fx-0p-CQ8">
+                                <rect key="frame" x="0.0" y="-21" width="414" height="917"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoText" translatesAutoresizingMaskIntoConstraints="NO" id="zNE-vD-cTZ">
                                 <rect key="frame" x="87" y="384" width="240" height="128"/>
                                 <constraints>
@@ -27,7 +30,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.82788258018199001" green="0.029736914411438258" blue="0.8031408999899563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2fx-0p-CQ8" secondAttribute="trailing" id="0nu-AY-wQf"/>
                             <constraint firstItem="zNE-vD-cTZ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="9kA-c4-FBC"/>
+                            <constraint firstItem="2fx-0p-CQ8" firstAttribute="centerX" secondItem="zNE-vD-cTZ" secondAttribute="centerX" id="K8f-gN-gWi"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="2fx-0p-CQ8" secondAttribute="bottom" constant="-34" id="VQN-Qx-DoN"/>
+                            <constraint firstItem="2fx-0p-CQ8" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" constant="-65" id="XCK-t6-Pv3"/>
                             <constraint firstItem="zNE-vD-cTZ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="nub-73-F1i"/>
                         </constraints>
                     </view>
@@ -38,6 +45,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BackImg" width="512" height="512"/>
         <image name="LogoText" width="166" height="48"/>
     </resources>
 </document>

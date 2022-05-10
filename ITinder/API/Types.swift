@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct TokenData: Decodable{
     let accessToken: String
@@ -45,5 +46,13 @@ struct UserData:Decodable{
         case aboutMyself
         case avatar
         case topics
+    }
+}
+
+struct UserMatch:Decodable{
+    let isMutual: Bool
+    
+    enum CodingKeys: String, CodingKey{
+        case isMutual
     }
 }

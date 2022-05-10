@@ -37,7 +37,11 @@ class AuthController: UIViewController {
     
     @IBAction func OnLoginClick(_ sender: UIButton) {
         if let email = EmailField.text, let password = PasswordField.text{
-            userAction.loginUser(email: email, password: password)
+            userAction.loginUser(email: email, password: password){
+                let nextViewController = self.storyBoard.instantiateViewController(withIdentifier: "MainBar") as UIViewController
+                    nextViewController.modalPresentationStyle = .fullScreen
+                    self.present(nextViewController, animated: false, completion: nil)
+            }
         }
     }
 }
