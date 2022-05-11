@@ -193,16 +193,19 @@ struct userAction{
         
         userApi.getListOfMessagesForUser(chatId: chatId, parameters: parameters).validate().responseDecodable(of: [Message].self){
             response in
+            debugPrint(response)
             guard let data = response.value else {return}
             
             UserChatsState.currentMessages.append(contentsOf: data)
+            callback()
         }
     }
     
     static func sendMessageToUser(_ chatId: String, messageText: String, attachments: [Data], callback: @escaping () -> Void = emptyCallback){
         let file = MultipartFormData()
 
-        file.append(chatId.data(using: .utf8)!, withName: "messageText")
+        file.append(Data(chatId.utf8), withName: "messageText")
+        //file.append((chatId as NSString).data(using: String.Encoding.utf8.rawValue)!, withName: "messageText")
         
         if attachments.count > 0 {
             for element in attachments {
@@ -210,8 +213,11 @@ struct userAction{
             }
         }
         
+        debugPrint(file)
+        
         userApi.sendMessageForUser(chatId: chatId, parametrs: file).responseDecodable(of: Message.self){
             response in
+            debugPrint(response)
             guard let data = response.value else {return}
             
             UserChatsState.currentMessages.append(data)

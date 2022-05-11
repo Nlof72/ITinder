@@ -10,6 +10,8 @@ import UIKit
 class ChatsController: UIViewController {
     @IBOutlet weak var Chats: UITableView!
     
+    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,5 +37,15 @@ extension ChatsController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 96
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        userAction.getUserMessages(UserChatsState.chats[indexPath.item].chat.id, limit: 40, offset: 0){
+            let nextViewController = self.storyBoard.instantiateViewController(withIdentifier: "UserChat") as! UserChatController
+                    nextViewController.modalPresentationStyle = .fullScreen
+            nextViewController.ChatInfo = UserChatsState.currentMessages
+            nextViewController.SelfChat = UserChatsState.chats[indexPath.item].chat
+            self.show(nextViewController, sender: self)
+        }
     }
 }

@@ -93,23 +93,23 @@ class FlowController: UIViewController {
     }
     
     @IBAction func onLikeClick(_ sender: UIButton) {
-        self.tabBarController?.view.addSubview(self.MatchView)
-//        let id = self.userData?[self.currentUserIndex].userId
-//        if id != nil{
-//            userAction.likeUser(userId: id!){
-//                isMutual in
-//                if isMutual{
-//                    if let tabBarController = self.tabBarController {
-//                        tabBarController.view.addSubview(self.MatchView)
-//                    }
-//                }else{
-//                    if self.currentUserOutsid == nil{
-//                        self.currentUserIndex = self.currentUserIndex + 1
-//                        self.initUser(self.userData?[self.currentUserIndex])
-//                    }
-//                }
-//            }
-//        }
+        //self.tabBarController?.view.addSubview(self.MatchView)
+        let id = self.userData?[self.currentUserIndex].userId
+        if id != nil{
+            userAction.likeUser(userId: id!){
+                isMutual in
+                if isMutual{
+                    if let tabBarController = self.tabBarController {
+                        tabBarController.view.addSubview(self.MatchView)
+                    }
+                }else{
+                    if self.currentUserOutsid == nil{
+                        self.currentUserIndex = self.currentUserIndex + 1
+                        self.initUser(self.userData?[self.currentUserIndex])
+                    }
+                }
+            }
+        }
     }
     
     

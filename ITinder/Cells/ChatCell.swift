@@ -10,7 +10,7 @@ import UIKit
 class ChatCell: UITableViewCell {
     @IBOutlet weak var UserIcon: UIImageView!
     @IBOutlet weak var UserName: UILabel!
-    @IBOutlet weak var LastMessage: UITextView!
+    @IBOutlet weak var LastMessage: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
