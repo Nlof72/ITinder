@@ -45,15 +45,22 @@
                             </stackView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Bmi-kS-kXv" secondAttribute="trailing" id="4sn-Ag-dX8"/>
+                            <constraint firstItem="Bmi-kS-kXv" firstAttribute="top" secondItem="lau-5u-dGr" secondAttribute="top" id="Wkr-1J-Eca"/>
+                            <constraint firstAttribute="bottom" secondItem="Bmi-kS-kXv" secondAttribute="bottom" id="fO2-Sf-jqC"/>
                             <constraint firstItem="SmR-gw-Tzt" firstAttribute="leading" secondItem="lau-5u-dGr" secondAttribute="leading" id="hU3-nJ-2ZQ"/>
                             <constraint firstAttribute="bottom" secondItem="SmR-gw-Tzt" secondAttribute="bottom" id="tXr-I5-FAD"/>
                         </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="lau-5u-dGr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5Ka-Cu-O90"/>
+                    <constraint firstAttribute="trailing" secondItem="lau-5u-dGr" secondAttribute="trailing" id="8ce-Xr-3eH"/>
                     <constraint firstAttribute="bottom" secondItem="lau-5u-dGr" secondAttribute="bottom" id="F1H-aK-HPq"/>
+                    <constraint firstAttribute="bottom" secondItem="lau-5u-dGr" secondAttribute="bottom" id="SmT-fc-Lg6"/>
                     <constraint firstItem="lau-5u-dGr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="a5b-l3-MEV"/>
                     <constraint firstAttribute="trailing" secondItem="lau-5u-dGr" secondAttribute="trailing" id="e7B-nD-6TF"/>
+                    <constraint firstItem="lau-5u-dGr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fwf-TJ-4ho"/>
                     <constraint firstItem="lau-5u-dGr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="jwN-b3-ypR"/>
                 </constraints>
             </tableViewCellContentView>

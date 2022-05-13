@@ -204,7 +204,7 @@ struct userAction{
     static func sendMessageToUser(_ chatId: String, messageText: String, attachments: [Data], callback: @escaping () -> Void = emptyCallback){
         let file = MultipartFormData()
 
-        file.append(Data(chatId.utf8), withName: "messageText")
+        file.append(Data(messageText.utf8), withName: "messageText", mimeType: "text/plain")
         //file.append((chatId as NSString).data(using: String.Encoding.utf8.rawValue)!, withName: "messageText")
         
         if attachments.count > 0 {

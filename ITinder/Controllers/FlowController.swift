@@ -19,8 +19,14 @@ class FlowController: UIViewController {
     var currentUserIndex = 0
     public var currentUserOutsid: UserData? = nil
     
+    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGestureRecognize = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        UserImage.isUserInteractionEnabled = true
+        UserImage.addGestureRecognizer(tapGestureRecognize)
         
         MatchView.removeFromSuperview()
         initUser(userData?[currentUserIndex])
@@ -132,5 +138,16 @@ class FlowController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
+    }
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        //let tappedImage = tapGestureRecognizer.view as! UIImageView
+
+        let nextViewController = self.storyBoard.instantiateViewController(withIdentifier: "BigUser") as! BigUserController
+        nextViewController.modalPresentationStyle = .fullScreen
+        nextViewController.currentUserData = self.userData?[self.currentUserIndex]
+        nextViewController.hideTabBar()
+        self.show(nextViewController, sender: self)
     }
 }
