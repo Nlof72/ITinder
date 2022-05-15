@@ -18,7 +18,10 @@ class MainContainerController: UITabBarController {
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-
+        debugPrint("7777777777")
+        debugPrint(Controllers)
+        debugPrint(self.selectedIndex)
+        
         if self.selectedIndex == 0  {
             if Controllers.count == 0{
                 

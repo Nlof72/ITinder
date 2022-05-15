@@ -15,12 +15,12 @@ class ChatsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //(tabBarController as! MainContainerController).Controllers.append(self)
+        (tabBarController as! MainContainerController).Controllers.append(self)
         
         Chats.delegate = self
         Chats.dataSource = self
         Chats.register(UINib(nibName: "ChatCell", bundle: nil), forCellReuseIdentifier: "ChatCell")
-        print("----------======---------")
+
         // Do any additional setup after loading the view.
     }
     
@@ -61,6 +61,7 @@ extension ChatsController: UITableViewDelegate, UITableViewDataSource{
         tabBarController?.tabBar.isUserInteractionEnabled = false
         navigationController?.navigationBar.isUserInteractionEnabled = false
         userAction.getUserMessages(UserChatsState.chats[indexPath.item].chat.id, limit: UserChatsState.limit, offset: UserChatsState.offset){
+            data in 
             self.Loading.removeFromSuperview()
             self.tabBarController?.tabBar.isUserInteractionEnabled = true
             self.navigationController?.navigationBar.isUserInteractionEnabled = true

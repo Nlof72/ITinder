@@ -189,7 +189,7 @@ struct userAction{
         }
     }
     
-    static func getUserMessages(_ chatId: String, limit: Int, offset: Int, callback: @escaping () -> Void = emptyCallback){
+    static func getUserMessages(_ chatId: String, limit: Int, offset: Int, callback: @escaping (_ data: [Message]) -> Void = emptyMessageArray){
         let parameters: [String: Int] = [
             "limit": limit,
             "offset": offset,
@@ -201,7 +201,7 @@ struct userAction{
             guard let data = response.value else {return}
             
             UserChatsState.currentMessages.append(contentsOf: data)
-            callback()
+            callback(data)
         }
     }
     
@@ -224,6 +224,7 @@ struct userAction{
             debugPrint(response)
             UserChatsState.currentMessages = []
             getUserMessages(chatId, limit: UserChatsState.limit, offset: UserChatsState.offset){
+                data in 
                 callback()
             }
             guard let data = response.value else {return}
@@ -247,6 +248,9 @@ func emptyUserArrayCallback(userData: [UserData]) {
     
 }
 
+func emptyMessageArray(messages: [Message]){
+    
+}
 
 func emptyCallback(data: ChatInfo) {
     

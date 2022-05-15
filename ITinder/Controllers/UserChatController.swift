@@ -27,6 +27,7 @@ class UserChatController: UIViewController {
         if let id = SelfChat?.id{
             UserChatsState.currentMessages = []
             userAction.getUserMessages(id, limit: UserChatsState.limit, offset: UserChatsState.offset){
+                data in 
                 NSLog("counting..")
                 self.Chat.reloadData()
             }
@@ -46,7 +47,59 @@ class UserChatController: UIViewController {
         Chat.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
         self.Chat.separatorStyle = UITableViewCell.SeparatorStyle.none
         Chat.transform = CGAffineTransform(scaleX: 1, y: -1)
+        
+        if let avatar = SelfChat?.avatar{
+            if let url = URL(string: avatar){
+                if let data = try? Data(contentsOf: url) {
+                    self.navigationItem.titleView = navTitleWithImageAndText(titleText: SelfChat?.title, imageData: data)
+                }
+            }
+        }
+
+
         // Do any additional setup after loading the view.
+    }
+    
+    func navTitleWithImageAndText(titleText: String?, imageData: Data) -> UIView {
+
+        // Creates a new UIView
+        let titleView = UIView()
+
+        // Creates a new text label
+        let label = UILabel()
+        label.text = titleText
+        label.sizeToFit()
+        label.center = titleView.center
+        label.textAlignment = NSTextAlignment.center
+        //label.font = label.font.withSize(18.0)
+
+        // Creates the image view
+        let image = UIImageView()
+        image.image = UIImage(data: imageData)
+
+        // Maintains the image's aspect ratio:
+        let imageAspect = image.image!.size.width / image.image!.size.height
+
+        // Sets the image frame so that it's immediately before the text:
+        let imageX = label.frame.origin.x - label.frame.size.height * imageAspect
+        let imageY = label.frame.origin.y
+
+        let imageWidth = label.frame.size.height * imageAspect
+        let imageHeight = label.frame.size.height
+
+        image.frame = CGRect(x: imageX, y: imageY, width: imageWidth, height: imageHeight)
+
+        image.contentMode = UIView.ContentMode.scaleAspectFit
+
+        // Adds both the label and image view to the titleView
+        titleView.addSubview(label)
+        titleView.addSubview(image)
+
+        // Sets the titleView frame to fit within the UINavigation Title
+        titleView.sizeToFit()
+
+        return titleView
+
     }
     
     @IBAction func AddMedia(_ sender: UIButton) {
@@ -100,6 +153,30 @@ extension UserChatController: UITableViewDelegate, UITableViewDataSource{
             
 
         return chatCell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let currentItemNumber = indexPath.item
+        let middleCountOfUser = (UserChatsState.currentMessages.count)/2
+        guard let id = SelfChat?.id else {return}
+        if currentItemNumber > middleCountOfUser{
+            if UserChatsState.loading  || UserChatsState.allMessages{
+                return
+            }
+            UserChatsState.loading = true
+            userAction.getUserMessages(id,limit: UserChatsState.limit, offset: UserChatsState.offset + UserChatsState.limit){
+                response in
+                self.Chat.reloadData()
+                if response.count < UserChatsState.limit {
+                    UserChatsState.allMessages = true
+                    UserChatsState.loading = false
+                    return
+                }
+                UserChatsState.offset = UserChatsState.offset + UserChatsState.limit
+                UserChatsState.loading = false
+                debugPrint(response)
+            }
+        }
     }
     
 
