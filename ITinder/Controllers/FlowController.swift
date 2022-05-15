@@ -13,6 +13,7 @@ class FlowController: UIViewController {
     @IBOutlet weak var UserTags: UIStackView!
     @IBOutlet weak var UserDescription: UITextView!
     @IBOutlet var MatchView: UIView!
+    @IBOutlet weak var Loading: UIView!
     
     let userData = AppState.userFeed
     let tagsView = TagLabelView()
@@ -81,7 +82,7 @@ class FlowController: UIViewController {
 
     @IBAction func onRefuseClick(_ sender: UIButton) {
         var id: String?
-        
+    
         if let outsideId = currentUserOutsid?.userId{
             id = outsideId
         }else{
@@ -99,16 +100,25 @@ class FlowController: UIViewController {
     }
     
     @IBAction func onLikeClick(_ sender: UIButton) {
+        
         //self.tabBarController?.view.addSubview(self.MatchView)
+        self.view.addSubview(self.Loading)
+        self.Loading.frame.size.height = (self.navigationController?.view.bounds.height)!
+        tabBarController?.tabBar.isUserInteractionEnabled = false
+        navigationController?.navigationBar.isUserInteractionEnabled = false
         let id = self.userData?[self.currentUserIndex].userId
         if id != nil{
             userAction.likeUser(userId: id!){
                 isMutual in
+                self.Loading.removeFromSuperview()
                 if isMutual{
                     if let tabBarController = self.tabBarController {
                         tabBarController.view.addSubview(self.MatchView)
+                        self.MatchView.frame.size.height = (self.navigationController?.view.bounds.height)!
                     }
                 }else{
+                    self.tabBarController?.tabBar.isUserInteractionEnabled = true
+                    self.navigationController?.navigationBar.isUserInteractionEnabled = true
                     if self.currentUserOutsid == nil{
                         self.currentUserIndex = self.currentUserIndex + 1
                         self.initUser(self.userData?[self.currentUserIndex])
@@ -122,6 +132,9 @@ class FlowController: UIViewController {
     @IBAction func onWriteMessage(_ sender: UIButton) {
         var id: String?
         
+        
+        self.view.addSubview(self.Loading)
+        self.Loading.frame.size.height = (self.navigationController?.view.bounds.height)!
         if let outsideId = currentUserOutsid?.userId{
             id = outsideId
         }else{
@@ -129,7 +142,14 @@ class FlowController: UIViewController {
         }
         if let userId = id{
             debugPrint("-----====-----")
-            userAction.createChat(userId)
+            userAction.createChat(userId){
+                chat in
+                let nextViewController = self.storyBoard.instantiateViewController(withIdentifier: "UserChat") as! UserChatController
+                nextViewController.modalPresentationStyle = .fullScreen
+                nextViewController.SelfChat = chat
+                
+                self.show(nextViewController, sender: self)
+            }
         }
         
 
@@ -142,8 +162,6 @@ class FlowController: UIViewController {
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        //let tappedImage = tapGestureRecognizer.view as! UIImageView
-
         let nextViewController = self.storyBoard.instantiateViewController(withIdentifier: "BigUser") as! BigUserController
         nextViewController.modalPresentationStyle = .fullScreen
         nextViewController.currentUserData = self.userData?[self.currentUserIndex]

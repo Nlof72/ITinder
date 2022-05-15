@@ -9,6 +9,8 @@ import UIKit
 
 class MainContainerController: UITabBarController {
 
+    public var Controllers:[UIViewController] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -16,6 +18,16 @@ class MainContainerController: UITabBarController {
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+
+        if self.selectedIndex == 0  {
+            if Controllers.count == 0{
+                
+            }else{
+                print("---------------")
+                print((Controllers[0] as! ChatsController))
+                (Controllers[0] as! ChatsController).reloadChat()
+            }
+
+        }
     }
-    
 }

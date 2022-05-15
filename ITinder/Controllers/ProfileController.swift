@@ -16,6 +16,8 @@ class ProfileController: UIViewController {
     let userData = AppState.userData
     let tagsView = TagLabelView()
     
+    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,7 +55,17 @@ class ProfileController: UIViewController {
         }
 
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Профиль"
+        backItem.tintColor = UIColor(red: 250/255, green: 19/255, blue: 171/255, alpha: 1)
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+    }
 
-    @IBAction func OnEditClicl(_ sender: UIButton) {
+    @IBAction func OnEditClick(_ sender: UIButton) {
+        let nextViewController = self.storyBoard.instantiateViewController(withIdentifier: "ProfileInfoEdit") as UIViewController
+            nextViewController.modalPresentationStyle = .fullScreen
+            self.show(nextViewController, sender: self)
     }
 }

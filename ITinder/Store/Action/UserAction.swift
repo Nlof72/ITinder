@@ -32,7 +32,7 @@ struct userAction{
         }
     }
 
-    static func loginUser(email:String, password:String, callback: @escaping () -> Void){
+    static func loginUser(email:String, password:String, errorCallBack: @escaping () -> Void = emptyCallback ,callback: @escaping () -> Void){
         let parameters: [String: String] = [
             "email": email,
             "password": password,
@@ -40,7 +40,11 @@ struct userAction{
         userApi.loginUser(parameters: parameters).validate().responseDecodable(of: TokenData.self){
             response in
             debugPrint(response)
-            guard let data = response.value else { return }
+            guard let data = response.value else {
+                errorCallBack()
+                return
+                
+            }
             UserDefaults.standard.set(data.accessToken, forKey: "accessToken")
             getTopics()
             getPagedUserList(limit: AppState.limit, offset: AppState.offset	)
@@ -170,7 +174,7 @@ struct userAction{
         }
     }
     
-    static func createChat(_ userId: String, callback: @escaping () -> Void = emptyCallback){
+    static func createChat(_ userId: String, callback: @escaping (_ chatData: ChatInfo) -> Void = emptyCallback){
         let parameters: [String: String] = [
             "userId": userId,
         ]
@@ -181,7 +185,7 @@ struct userAction{
             guard let data = response.value else {return}
             
             UserChatsState.chats.append(ChatElement(chat: data, lastMessage: nil))
-            callback()
+            callback(data)
         }
     }
     
@@ -218,6 +222,10 @@ struct userAction{
         userApi.sendMessageForUser(chatId: chatId, parametrs: file).responseDecodable(of: Message.self){
             response in
             debugPrint(response)
+            UserChatsState.currentMessages = []
+            getUserMessages(chatId, limit: UserChatsState.limit, offset: UserChatsState.offset){
+                callback()
+            }
             guard let data = response.value else {return}
             
             UserChatsState.currentMessages.append(data)
@@ -236,5 +244,10 @@ func emptyBoolCallback(isMatch: Bool) {
 }
 
 func emptyUserArrayCallback(userData: [UserData]) {
+    
+}
+
+
+func emptyCallback(data: ChatInfo) {
     
 }

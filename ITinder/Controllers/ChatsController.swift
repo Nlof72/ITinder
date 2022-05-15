@@ -9,16 +9,32 @@ import UIKit
 
 class ChatsController: UIViewController {
     @IBOutlet weak var Chats: UITableView!
+    @IBOutlet weak var Loading: UIView!
     
     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //(tabBarController as! MainContainerController).Controllers.append(self)
+        
         Chats.delegate = self
         Chats.dataSource = self
         Chats.register(UINib(nibName: "ChatCell", bundle: nil), forCellReuseIdentifier: "ChatCell")
+        print("----------======---------")
         // Do any additional setup after loading the view.
+    }
+    
+    func reloadChat(){
+        self.view.addSubview(self.Loading)
+        self.Loading.frame.size.height = (self.navigationController?.view.bounds.height)!
+        tabBarController?.tabBar.isUserInteractionEnabled = false
+        navigationController?.navigationBar.isUserInteractionEnabled = false
+        userAction.getAllChats(){
+            self.Loading.removeFromSuperview()
+            self.tabBarController?.tabBar.isUserInteractionEnabled = true
+            self.navigationController?.navigationBar.isUserInteractionEnabled = true
+            self.Chats.reloadData()
+        }
     }
 }
 
@@ -40,7 +56,14 @@ extension ChatsController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        userAction.getUserMessages(UserChatsState.chats[indexPath.item].chat.id, limit: 40, offset: 0){
+        self.view.addSubview(self.Loading)
+        self.Loading.frame.size.height = (self.navigationController?.view.bounds.height)!
+        tabBarController?.tabBar.isUserInteractionEnabled = false
+        navigationController?.navigationBar.isUserInteractionEnabled = false
+        userAction.getUserMessages(UserChatsState.chats[indexPath.item].chat.id, limit: UserChatsState.limit, offset: UserChatsState.offset){
+            self.Loading.removeFromSuperview()
+            self.tabBarController?.tabBar.isUserInteractionEnabled = true
+            self.navigationController?.navigationBar.isUserInteractionEnabled = true
             let nextViewController = self.storyBoard.instantiateViewController(withIdentifier: "UserChat") as! UserChatController
                     nextViewController.modalPresentationStyle = .fullScreen
             nextViewController.ChatInfo = UserChatsState.currentMessages

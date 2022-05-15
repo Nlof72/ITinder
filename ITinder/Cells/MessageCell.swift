@@ -11,6 +11,9 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var UserImage: UIImageView!
     @IBOutlet weak var MessageText: UILabel!
     @IBOutlet weak var MessageDate: UILabel!
+    @IBOutlet weak var Attachment: UIImageView!
+    
+    @IBOutlet weak var MessageContent: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,8 +36,18 @@ class MessageCell: UITableViewCell {
         }else{
             self.UserImage.image = UIImage(named: "ImagePlaceholder")
         }
-        UserImage.cornerRadius = 50
+        UserImage.cornerRadius = 25
         MessageText.text = messageData.text
+        
+        if messageData.attachments.isEmpty{
+            Attachment.isHidden = true
+        }else{
+            if let url = URL(string: messageData.attachments[0]){
+                if let data = try? Data(contentsOf: url) {
+                    self.Attachment.image = UIImage(data: data)
+                }
+            }
+        }
         
         let dateFormatter = DateFormatter()
 
@@ -51,6 +64,7 @@ class MessageCell: UITableViewCell {
         print("-------------")
         print(convertDateFormatter(messageData.createdAt))
         
+        
 //        formatter.locale = Locale(identifier: "en_US_POSIX")
 //        formatter.dateFormat = "yyyy-MM-dd"
 //        print("-------------")
@@ -62,6 +76,21 @@ class MessageCell: UITableViewCell {
 //            MessageDate.text = formatter.string(from: date)
 //
 //        }
+        
+        //addTopAndBottomBorders()
+        
+        MessageContent.layer.borderWidth = 1.5
+        MessageContent.layer.borderColor = UIColor.gray.cgColor
+
+        MessageContent.layer.cornerRadius = 10
+        MessageContent.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
+    }
+    
+    func reverseCell(){
+        MessageText.transform = CGAffineTransform(scaleX: -1, y: 1)
+        MessageText.textAlignment = .right
+        MessageDate.transform = CGAffineTransform(scaleX: -1, y: 1)
+        MessageDate.textAlignment = .right
     }
     
     func convertDateFormatter(_ date: String) -> String {
@@ -83,4 +112,28 @@ class MessageCell: UITableViewCell {
         return timeStamp
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        //contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: -10, right: 0))
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        Attachment.isHidden = false
+    }
+    
+    func addTopAndBottomBorders() {
+        let thickness: CGFloat = 2.0
+        let topBorder = CALayer()
+        let bottomBorder = CALayer()
+        let leftBorder = CALayer()
+        let rightBorder = CALayer()
+        topBorder.frame = CGRect(x: 0.0, y: 0.0, width: self.MessageContent.frame.size.width, height: thickness)
+        topBorder.backgroundColor = UIColor.red.cgColor
+        bottomBorder.frame = CGRect(x:0, y: self.MessageContent.frame.size.height - thickness, width: self.MessageContent.frame.size.width, height:thickness)
+        bottomBorder.backgroundColor = UIColor.red.cgColor
+        MessageContent.layer.addSublayer(topBorder)
+        MessageContent.layer.addSublayer(bottomBorder)
+    }
 }

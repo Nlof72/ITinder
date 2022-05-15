@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		111AEBF8283170E20095376B /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111AEBF7283170E20095376B /* Validation.swift */; };
 		116D93C82819F87300FD765C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 116D93C72819F87300FD765C /* Kingfisher */; };
 		116D93D32819F87300FD765C /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116D93D22819F87300FD765C /* CustomTextView.swift */; };
 		116D93DD2819F87300FD765C /* ExtensionViewEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116D93DC2819F87300FD765C /* ExtensionViewEditor.swift */; };
@@ -118,6 +119,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		111AEBF7283170E20095376B /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		116D93D22819F87300FD765C /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		116D93DC2819F87300FD765C /* ExtensionViewEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionViewEditor.swift; sourceTree = "<group>"; };
 		116E335228194E92000D6BBF /* UserAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAction.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				1184C28C281B140500945E9D /* ExtensionForTextView.swift */,
 				1170275F281D00E7003B445D /* CustomTableView.swift */,
 				118A1771281D80B4007B3EAD /* LabelTableView.swift */,
+				111AEBF7283170E20095376B /* Validation.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				11901425282DA3E500DB1D26 /* BigUserController.swift in Sources */,
 				11B29CCF2817F06300A32126 /* Gradient.swift in Sources */,
 				11B29CBB2817ED4D00A32126 /* ViewController.swift in Sources */,
+				111AEBF8283170E20095376B /* Validation.swift in Sources */,
 				118A1772281D80B4007B3EAD /* LabelTableView.swift in Sources */,
 				1176AFBF281AEAC600B0B372 /* AboutYouController.swift in Sources */,
 				11702760281D00E7003B445D /* CustomTableView.swift in Sources */,

@@ -72,7 +72,7 @@ struct UserChatInfo:Decodable{
 
 struct Message:Decodable{
     let id: String
-    let text: String
+    let text: String?
     let createdAt: String
     let user: UserChatInfo
     let attachments: [String]

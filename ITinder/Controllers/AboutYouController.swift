@@ -14,6 +14,7 @@ class AboutYouController: UIViewController {
     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
     let tagsView = TagButtonView()
     
+    @IBOutlet weak var Loading: UIView!
     @IBOutlet weak var UserNameField: MyTextField!
     @IBOutlet weak var AboutYouInfo: UITextView!
     @IBOutlet weak var UserImagePhoto: UIImageView!
@@ -26,6 +27,7 @@ class AboutYouController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         AboutYouInfo.textContainerInset = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
         tabBarController?.tabBar.isHidden = true
 
@@ -75,6 +77,7 @@ class AboutYouController: UIViewController {
     }
     
     @IBAction func onButtonSaveClick(_ sender: UIButton) {
+        self.view.addSubview(self.Loading)
         
         if let image = UserImagePhoto.image {
             if let data = image.jpegData(compressionQuality: 0.5){

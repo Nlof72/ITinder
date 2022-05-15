@@ -21,6 +21,8 @@ struct AppState {
 struct UserChatsState{
     static var chats: [ChatElement] = []
     static var currentMessages: [Message] = []
+    static var limit = 60
+    static var offset = 0
 }
 
 
