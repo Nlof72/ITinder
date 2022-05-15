@@ -25,9 +25,9 @@ class UserChatController: UIViewController {
           
     @objc func updateCounting(){
         if let id = SelfChat?.id{
-            UserChatsState.currentMessages = []
             userAction.getUserMessages(id, limit: UserChatsState.limit, offset: UserChatsState.offset){
-                data in 
+                data in
+                UserChatsState.currentMessages = data
                 NSLog("counting..")
                 self.Chat.reloadData()
             }
@@ -148,8 +148,10 @@ extension UserChatController: UITableViewDelegate, UITableViewDataSource{
 //        if indexPath.item > UserChatsState.currentMessages.count{
 //            return
 //        }
+        debugPrint(indexPath)
         let currentMessage = UserChatsState.currentMessages[indexPath.item]
         chatCell.setupMessageCell(currentMessage)
+        chatCell.selectionStyle = .none
         
         if currentMessage.user.userId == AppState.userData?.userId{
             chatCell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)

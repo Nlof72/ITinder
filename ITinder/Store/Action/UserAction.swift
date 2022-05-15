@@ -226,9 +226,9 @@ struct userAction{
         userApi.sendMessageForUser(chatId: chatId, parametrs: file).responseDecodable(of: Message.self){
             response in
             debugPrint(response)
-            UserChatsState.currentMessages = []
             getUserMessages(chatId, limit: UserChatsState.limit, offset: UserChatsState.offset){
-                data in 
+                data in
+                UserChatsState.currentMessages = data
                 callback()
             }
             guard let data = response.value else {return}

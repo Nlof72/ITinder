@@ -109,6 +109,7 @@ class MessageCell: UITableViewCell {
         MessageDate.transform = CGAffineTransform(scaleX: -1, y: 1)
         MessageDate.textAlignment = .right
         MessageContent.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
+        Attachment.transform = CGAffineTransform(scaleX: -1, y: 1)
     }
     
     func convertDateFormatter(_ date: String) -> String {
@@ -143,5 +144,6 @@ class MessageCell: UITableViewCell {
         MessageText.textAlignment = .left
         MessageDate.transform = CGAffineTransform(scaleX: 1, y: 1)
         MessageDate.textAlignment = .left
+        Attachment.transform = CGAffineTransform(scaleX: 1, y: 1)
     }
 }
