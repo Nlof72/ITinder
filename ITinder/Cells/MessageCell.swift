@@ -51,20 +51,35 @@ class MessageCell: UITableViewCell {
         
         MessageDate.text = messageData.createdAt
         
-        let dateFormatter = DateFormatter()
+        //let dateFormatter = DateFormatter()
 
 //        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 //
 //        let updatedAtStr = "2016-06-05T16:56:57.019+01:00"
 //        let updatedAt = dateFormatter.date(from: messageData.createdAt)
         
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let date = dateFormatter.date(from: "2015-10-17T00:00:00.000Z")
-        print("date: \(date!)")
+//        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        let date = dateFormatter.date(from: "2015-10-17T00:00:00.000Z")
+//        print("date: \(date!)")
         
         print("-------------")
         print(convertDateFormatter(messageData.createdAt))
+        
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ru_RU_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        let date = formatter.date(from: messageData.createdAt.replacingOccurrences(of: "[UTC]", with: ""))
+
+//        formatter.timeStyle = .short
+//        formatter.dateStyle = .long
+        formatter.dateFormat = "HH:mm * d MM yyyy"
+        
+        debugPrint(formatter.string(from: date!))
+        //let date = formatter.date(from: messageData.createdAt.replacingOccurrences(of: "[UTC]", with: ""))
+        print(date)
+        MessageDate.text = formatter.string(from: date!)
         
         
 //        formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -97,13 +112,14 @@ class MessageCell: UITableViewCell {
     }
     
     func convertDateFormatter(_ date: String) -> String {
+        let newDate = date.replacingOccurrences(of: "[UTC]", with: "")
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.zzz"//this your string date format
         dateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
-        dateFormatter.locale = Locale(identifier: "your_loc_id")
-        let convertedDate = dateFormatter.date(from: date)
+        dateFormatter.locale = Locale(identifier: "ru_Ru")
+        let convertedDate = dateFormatter.date(from: newDate)
 
-        guard dateFormatter.date(from: date) != nil else {
+        guard dateFormatter.date(from: newDate) != nil else {
 //            assert(false, "no date from string")
             return ""
         }

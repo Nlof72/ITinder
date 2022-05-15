@@ -104,13 +104,20 @@ class FlowController: UIViewController {
     @IBAction func onLikeClick(_ sender: UIButton) {
         
         //self.tabBarController?.view.addSubview(self.MatchView)
-        self.view.addSubview(self.Loading)
+
         self.Loading.frame.size.height = (self.navigationController?.view.bounds.height)!
         tabBarController?.tabBar.isUserInteractionEnabled = false
         navigationController?.navigationBar.isUserInteractionEnabled = false
         let id = self.userData?[self.currentUserIndex].userId
+        debugPrint("99999999")
+        debugPrint(id)
         if id != nil{
-            userAction.likeUser(userId: id!){
+            self.view.addSubview(self.Loading)
+            userAction.likeUser(userId: id!, errorCallBack: {
+                self.Loading.removeFromSuperview()
+                self.tabBarController?.tabBar.isUserInteractionEnabled = true
+                self.navigationController?.navigationBar.isUserInteractionEnabled = true
+            }){
                 isMutual in
                 self.Loading.removeFromSuperview()
                 if isMutual{

@@ -141,10 +141,14 @@ struct userAction{
         callback()
     }
     
-    static func likeUser(userId: String, callback: @escaping (_ isMatch: Bool) -> Void = emptyBoolCallback){
+    static func likeUser(userId: String, errorCallBack: @escaping () -> Void = emptyCallback, callback: @escaping (_ isMatch: Bool) -> Void = emptyBoolCallback){
         userApi.likeUser(userId: userId).validate().responseDecodable(of: UserMatch.self){
             response in
-            guard let data = response.value else {return}
+            guard let data = response.value else {
+                errorCallBack()
+                return
+                
+            }
             callback(data.isMutual)
         }
     }
