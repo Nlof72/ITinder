@@ -91,7 +91,7 @@ extension UserChatController: UITableViewDelegate, UITableViewDataSource{
         let currentMessage = UserChatsState.currentMessages[indexPath.item]
         chatCell.setupMessageCell(currentMessage)
         
-        if currentMessage.user.userId != AppState.userData?.userId{
+        if currentMessage.user.userId == AppState.userData?.userId{
             chatCell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
         }else{
             chatCell.contentView.transform = CGAffineTransform(scaleX: -1, y: -1)

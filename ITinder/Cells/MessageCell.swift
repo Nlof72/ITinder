@@ -49,6 +49,8 @@ class MessageCell: UITableViewCell {
             }
         }
         
+        MessageDate.text = messageData.createdAt
+        
         let dateFormatter = DateFormatter()
 
 //        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
@@ -91,6 +93,7 @@ class MessageCell: UITableViewCell {
         MessageText.textAlignment = .right
         MessageDate.transform = CGAffineTransform(scaleX: -1, y: 1)
         MessageDate.textAlignment = .right
+        MessageContent.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
     }
     
     func convertDateFormatter(_ date: String) -> String {
@@ -114,26 +117,10 @@ class MessageCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        //contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: -10, right: 0))
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         Attachment.isHidden = false
-    }
-    
-    func addTopAndBottomBorders() {
-        let thickness: CGFloat = 2.0
-        let topBorder = CALayer()
-        let bottomBorder = CALayer()
-        let leftBorder = CALayer()
-        let rightBorder = CALayer()
-        topBorder.frame = CGRect(x: 0.0, y: 0.0, width: self.MessageContent.frame.size.width, height: thickness)
-        topBorder.backgroundColor = UIColor.red.cgColor
-        bottomBorder.frame = CGRect(x:0, y: self.MessageContent.frame.size.height - thickness, width: self.MessageContent.frame.size.width, height:thickness)
-        bottomBorder.backgroundColor = UIColor.red.cgColor
-        MessageContent.layer.addSublayer(topBorder)
-        MessageContent.layer.addSublayer(bottomBorder)
     }
 }
