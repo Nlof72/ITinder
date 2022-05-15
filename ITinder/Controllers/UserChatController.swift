@@ -90,6 +90,8 @@ class UserChatController: UIViewController {
         image.frame = CGRect(x: imageX, y: imageY, width: imageWidth, height: imageHeight)
 
         image.contentMode = UIView.ContentMode.scaleAspectFit
+        
+        image.cornerRadius = 10
 
         // Adds both the label and image view to the titleView
         titleView.addSubview(label)
@@ -122,6 +124,8 @@ class UserChatController: UIViewController {
                     self.Loading.removeFromSuperview()
                     self.Chat.reloadData()
                 }
+                TextMessage.text = nil
+                userAttachment = nil
             }
         }
     }
@@ -141,6 +145,9 @@ extension UserChatController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let chatCell = self.Chat.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
         
+//        if indexPath.item > UserChatsState.currentMessages.count{
+//            return
+//        }
         let currentMessage = UserChatsState.currentMessages[indexPath.item]
         chatCell.setupMessageCell(currentMessage)
         

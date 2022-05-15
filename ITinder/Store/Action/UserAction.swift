@@ -217,7 +217,7 @@ struct userAction{
         
         if attachments.count > 0 {
             for element in attachments {
-                file.append(element, withName: "file", fileName: "file.jpeg", mimeType: "image/jpeg")
+                file.append(element, withName: "attachments", fileName: "avatar.jpeg", mimeType: "image/jpeg")
             }
         }
         

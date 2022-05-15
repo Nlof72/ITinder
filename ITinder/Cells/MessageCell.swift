@@ -138,5 +138,10 @@ class MessageCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         Attachment.isHidden = false
+        MessageContent.backgroundColor = nil
+        MessageText.transform = CGAffineTransform(scaleX: 1, y: 1)
+        MessageText.textAlignment = .left
+        MessageDate.transform = CGAffineTransform(scaleX: 1, y: 1)
+        MessageDate.textAlignment = .left
     }
 }
