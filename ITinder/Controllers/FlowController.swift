@@ -57,6 +57,8 @@ class FlowController: UIViewController {
             self.UserImage.image = UIImage(named: "ImagePlaceholder")
         }
         
+//        UserImage.cornerRadius = 80
+        
         if let userName = currentUser?.name{
             UserName.text = userName
         }else{
