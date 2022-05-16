@@ -23,7 +23,7 @@ struct UserChatsState{
     static var currentMessages: [Message] = []
     static var loading = false
     static var allMessages = false
-    static var limit = 60
+    static var limit = 20
     static var offset = 0
 }
 

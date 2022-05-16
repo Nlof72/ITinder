@@ -36,6 +36,10 @@ class ChatsController: UIViewController {
             self.Chats.reloadData()
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        reloadChat()
+    }
 }
 
 

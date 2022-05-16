@@ -104,6 +104,7 @@ class MessageCell: UITableViewCell {
     }
     
     func reverseCell(){
+        MessageContent.layer.borderWidth = 0
         MessageText.transform = CGAffineTransform(scaleX: -1, y: 1)
         MessageText.textAlignment = .right
         MessageDate.transform = CGAffineTransform(scaleX: -1, y: 1)

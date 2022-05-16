@@ -132,6 +132,7 @@ class UserChatController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         UserChatsState.currentMessages = []
+        timer.invalidate()
         tabBarController?.tabBar.isHidden = false
     }
 }
@@ -192,6 +193,7 @@ extension UserChatController: UITableViewDelegate, UITableViewDataSource{
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 96
 //    }
+    
 }
 
 extension UserChatController: UIImagePickerControllerDelegate, UINavigationControllerDelegate    {

@@ -27,8 +27,8 @@ class MainContainerController: UITabBarController {
                 
             }else{
                 print("---------------")
-                print((Controllers[0] as! ChatsController))
-                (Controllers[0] as! ChatsController).reloadChat()
+                //print((Controllers[0] as! ChatsController))
+                //(Controllers[0] as! ChatsController).reloadChat()
             }
 
         }
